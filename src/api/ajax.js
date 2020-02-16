@@ -3,7 +3,7 @@ ajax请求函数模块
 返回值：promise对象
  */
 import axios from 'axios'
-export default function ajax (url, data = {}, type = 'GRT') {
+export default function ajax (url = '', data = {}, type = 'GET') {
   return new Promise(function (resolve, reject) {
     let promise
     if (type === 'GET') {
@@ -24,9 +24,9 @@ export default function ajax (url, data = {}, type = 'GRT') {
     }
     promise.then(function (response) {
       resolve(response.data)
+    }).catch(function (error) {
+      //失败了调用reject()
+      reject(error)
     })
-      .catch(function (error) {
-        reject(error)
-      })
   })
 }
